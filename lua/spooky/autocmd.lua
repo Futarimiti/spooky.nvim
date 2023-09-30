@@ -6,7 +6,7 @@ local create_callback = function (user)
     local emptyfile = fsize < 4
     if not emptyfile then return end
 
-    require('spooky.templates').maybe_insert(args.buf, user)
+    require('spooky.templates').maybe_insert(user)
   end
 end
 

@@ -6,7 +6,9 @@ local M = {}
 -- Find suitable templates for a buffer.
 -- If any found, do insertion, which may be interactive;
 -- If nothing found, or failed in determining ft, filename, etc., insert nothing.
-M.maybe_insert = function (buf, user)
+M.maybe_insert = function (user)
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_win_get_buf(win)
   local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
   if ft == '' then return end
   local fullname = vim.api.nvim_buf_get_name(buf)
@@ -17,8 +19,13 @@ M.maybe_insert = function (buf, user)
 
   local templates = require('spooky.templates.get').get_templates(skeleton_dir, ft, basename)
 
-  local choice = require('spooky.templates.select').maybe_choose_template(buf, templates, user)
-  if choice ~= nil then require('spooky.templates.insert').insert_to(buf, choice) end
+  local template_path = require('spooky.templates.select').maybe_choose_template(buf, templates, user)
+  if template_path ~= nil then
+    local lined_template = vim.fn.readfile(template_path)
+    local lined_normalised, special_bindings = require('spooky.templates.normalisation').normalise(buf, lined_template)
+    require('spooky.templates.insert').insert_to(buf, lined_normalised)
+    require('spooky.templates.cursor').place_cursor(win, special_bindings._cursor)
+  end
 end
 
 return M
