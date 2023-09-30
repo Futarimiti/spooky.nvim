@@ -85,7 +85,7 @@ here's your "${_}"
 -- Given the preamble, retrieve the bindings
 -- by evaluating the lua code.
 local get_bindings = function (preamble_text, buf)
-  local preamble = loadstring(preamble_text)()
+  local preamble = assert(loadstring(preamble_text))()
   if type(preamble) == 'nil' then return {} end
   assert(type(preamble) == 'function', '[spooky] Preamble should return a function')
   local res = preamble(buf)
