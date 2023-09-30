@@ -70,20 +70,26 @@ local write_to = function (buf, template)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end
 
+-- Keep track buffers we've already written to
+local did_write = {}
+
 -- When no templates: insert nothing.
 -- When one template: insert it.
 -- When multiple templates: select one, then insert it.
 local maybe_select_template = function (buf, templates, user)
-  if vim.tbl_isempty(templates) then return end
+  if vim.tbl_contains(did_write, buf) or vim.tbl_isempty(templates) then return end
+
   if #templates == 1 and user.auto_use_only then
     write_to(buf, templates[1])
+    table.insert(did_write, buf)
+    return
   end
 
-  local select_options = { '<No template>', unpack(templates) }
+  table.insert(templates, 1, '<No template>')
 
-  vim.ui.select(select_options, { prompt = '[spooky] Select template:' }, function (choice)
-    if choice == 0 then return end
-    write_to(buf, templates[choice])
+  vim.ui.select(templates, { prompt = '[spooky] Select template:' }, function (choice, idx)
+    if not (idx == nil or idx == 1) then write_to(buf, choice) end
+    table.insert(did_write, buf)
   end)
 end
 
