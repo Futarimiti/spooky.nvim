@@ -28,7 +28,7 @@ Default configuration:
 
 ```lua
 require('spooky').setup { directory = vim.fn.stdpath('config') .. '/skeletons'
-                        , case_sensitive = true
+                        , case_sensitive = false
                         , auto_use_only = true
                         , show_no_template = true
                         }
