@@ -15,11 +15,6 @@ Supports:
 - [x] Variable interpolation
 - [x] Cursor placement
 
-`esqueleto.nvim` is a minimal plugin that intends to make the use of templates
-or "skeletons" as easy and straightforward as possible. This package adds a prompt
-for inserting a specific template when creating a new file that matches a specific
-file name or pattern.
-
 ## Installation
 
 ```lua
