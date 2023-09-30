@@ -64,6 +64,7 @@ local get_templates = function (skeleton_dir, ft, basename)
   return get_general_templates(skeleton_dir, ft)
 end
 
+-- Undoable
 -- Alternatively, use :0r
 local write_to = function (buf, template)
   local lines = vim.fn.readfile(template)
