@@ -50,7 +50,7 @@ end
 
 -- Given the filetype and filename,
 -- find all templates that match them.
-local get_templates = function (skeleton_dir, ft, basename)
+M.get_templates = function (skeleton_dir, ft, basename)
   if not exists_dir(skeleton_dir) then
     vim.notify('[spooky] Directory *' .. skeleton_dir .. '* does not exist', vim.log.levels.ERROR)
     return {}
@@ -62,54 +62,6 @@ local get_templates = function (skeleton_dir, ft, basename)
   end
 
   return get_general_templates(skeleton_dir, ft)
-end
-
--- Undoable
--- Alternatively, use :0r
-local write_to = function (buf, template)
-  local lines = vim.fn.readfile(template)
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-end
-
--- Keep track buffers we've already written to
-local did_write = {}
-
--- When no templates: insert nothing.
--- When one template: insert it.
--- When multiple templates: select one, then insert it.
-local maybe_select_template = function (buf, templates, user)
-  if vim.tbl_contains(did_write, buf) or vim.tbl_isempty(templates) then return end
-
-  if #templates == 1 and user.auto_use_only then
-    write_to(buf, templates[1])
-    table.insert(did_write, buf)
-    return
-  end
-
-  local no_template = '<No template>'
-  if user.show_no_template then table.insert(templates, 1, no_template) end
-
-  vim.ui.select(templates, { prompt = '[spooky] Select template:' }, function (choice)
-    if not (choice == nil or choice == no_template) then write_to(buf, choice) end
-    table.insert(did_write, buf)
-  end)
-end
-
--- Find suitable templates for a buffer.
--- If any found, do insertion, which may be interactive;
--- If nothing found, or failed in determining ft, filename, etc., insert nothing.
-M.maybe_insert = function (buf, user)
-  local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
-  if ft == '' then return end
-  local fullname = vim.api.nvim_buf_get_name(buf)
-  if fullname == '' then return end
-
-  local skeleton_dir = user.directory
-  local basename = vim.fs.basename(fullname)
-
-  local templates = get_templates(skeleton_dir, ft, basename)
-
-  maybe_select_template(buf, templates, user)
 end
 
 return M
