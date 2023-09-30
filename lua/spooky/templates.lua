@@ -85,10 +85,11 @@ local maybe_select_template = function (buf, templates, user)
     return
   end
 
-  table.insert(templates, 1, '<No template>')
+  local no_template = '<No template>'
+  if user.show_no_template then table.insert(templates, 1, no_template) end
 
-  vim.ui.select(templates, { prompt = '[spooky] Select template:' }, function (choice, idx)
-    if not (idx == nil or idx == 1) then write_to(buf, choice) end
+  vim.ui.select(templates, { prompt = '[spooky] Select template:' }, function (choice)
+    if not (choice == nil or choice == no_template) then write_to(buf, choice) end
     table.insert(did_write, buf)
   end)
 end
