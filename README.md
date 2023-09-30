@@ -70,7 +70,7 @@ skeletons
         └── Unlicense.skl
 ```
 
-Check [here](https://github.com/Futarimiti/graveyard) for my personal skeleton files hierarchy.
+Check [here](https://github.com/Futarimiti/graveyard?search=1) for my personal skeleton files hierarchy.
 
 ### Skeleton syntax
 
