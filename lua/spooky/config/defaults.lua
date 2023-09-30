@@ -1,6 +1,6 @@
 local M = {}
 
-M.defaults = { directory = vim.fn.stdpath('config') .. 'skeletons'
+M.defaults = { directory = vim.fn.stdpath('config') .. '/skeletons'
              , case_sensitive = true
              , auto_use_only = true
              }
