@@ -57,7 +57,7 @@ M.get_templates = function (skeleton_dir, ft, basename)
   end
 
   local specifics = get_specific_templates(skeleton_dir, basename)
-  if specifics ~= {} then
+  if not vim.tbl_isempty(specifics) then
     return specifics
   end
 
