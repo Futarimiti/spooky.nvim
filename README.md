@@ -14,7 +14,7 @@ Supports:
 - [x] Multiple templates (choose at creation)
 - [x] Variable interpolation
 - [x] Cursor placement
-- [x] Syntax highlighting for templates
+- [x] Syntax highlighting for templates (yet basic)
 
 ## Installation
 
