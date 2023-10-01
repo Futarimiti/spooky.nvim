@@ -19,7 +19,9 @@ Supports:
 
 ```lua
 -- lazy.nvim
-return { 'Futarimiti/spooky.nvim' }
+return { 'Futarimiti/spooky.nvim'
+       , 'Futarimiti/spooky.vim'  -- syntax highlighting
+       }
 ```
 
 ## Configuration
