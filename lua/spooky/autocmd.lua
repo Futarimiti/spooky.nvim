@@ -2,6 +2,9 @@ local M = {}
 
 local create_callback = function (user)
   return function (args)
+    local normal_buf = vim.api.nvim_buf_get_option(args.buf, 'buftype') == ''
+    if not normal_buf then return end
+
     local fsize = vim.fn.getfsize(args.file)
     local emptyfile = fsize < 4
     if not emptyfile then return end
