@@ -14,14 +14,13 @@ Supports:
 - [x] Multiple templates (choose at creation)
 - [x] Variable interpolation
 - [x] Cursor placement
+- [x] Syntax highlighting for templates
 
 ## Installation
 
 ```lua
 -- lazy.nvim
-return { { 'Futarimiti/spooky.nvim' }
-       , { 'Futarimiti/spooky.vim' }  -- syntax highlighting
-       }
+return { 'Futarimiti/spooky.nvim' }
 ```
 
 ## Configuration
@@ -137,7 +136,6 @@ Here are some of the things I would like to add later on
 
 - [ ] Doc
 - [ ] Preview templates (e.g. with Telescope)
-- [ ] Add `.skl` filetype plugin
 - [ ] Greater customisation
 - [ ] Improve existing user options
     - [ ] Reorganise
