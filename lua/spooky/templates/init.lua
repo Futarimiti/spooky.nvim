@@ -16,6 +16,7 @@ M.maybe_insert = function (user)
 
   local skeleton_dir = user.directory
   local basename = vim.fs.basename(fullname)
+  if basename == '' then return end
 
   local templates = require('spooky.templates.get').get_templates(skeleton_dir, ft, basename)
 
