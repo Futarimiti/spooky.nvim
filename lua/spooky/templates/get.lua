@@ -10,7 +10,9 @@ end
 
 -- either: <specific_dir>/<basename>.skl (prioritised)
 -- or:     <specific_dir>/<basename>/name.skl
+-- where <basename> must not be empty
 local get_specific_templates = function (skeleton_dir, basename)
+  if basename == '' then return {} end
   local specific_dir = skeleton_dir .. '/specific'
   if not exists_dir(specific_dir) then return {} end
 
@@ -32,6 +34,7 @@ end
 -- either: <general_dir>/<ft>.skl (prioritised)
 -- or:     <general_dir>/<ft>/name.skl
 local get_general_templates = function (skeleton_dir, ft)
+  if ft == '' then return {} end
   local general_dir = skeleton_dir .. '/general'
   if not exists_dir(general_dir) then return {} end
   local supposed_general = general_dir .. '/' .. ft .. '.skl'
