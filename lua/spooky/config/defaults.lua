@@ -8,6 +8,7 @@ M.defaults = { directory = vim.fn.stdpath('config') .. '/skeletons'
              , show_no_template = true
              , ui = { select = 'builtin'
                     , prompt = 'Select template'
+                    , no_template = '<No template>'
                     , telescope_opts = {}
                     }
              }
@@ -21,6 +22,7 @@ M.typecheck = function (config)
                , ui = { config.ui, 'table' }
                , ['ui.prompt'] = { config.ui.prompt, 'string' }
                , ['ui.select'] = { config.ui.select, function (ui) return vim.tbl_contains(const.ui_list, ui) end }
+               , ['ui.no_template'] = { config.ui.no_template, 'string' }
                , ['ui.telescope_opts'] = { config.ui.telescope_opts, 'table' }
                }
 end
