@@ -13,7 +13,7 @@ M.choose_one = function (items, user)
     end)
 
     return temp
-  end)
+  end)()
 
   return user_choice
 end
