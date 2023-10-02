@@ -27,7 +27,8 @@ M.choose_one = function (items, user, do_with_choice)
       if entry_name == no_template then
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { '' })
       else
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { 'example', 'preview', 'screen' })
+        local filepath = entry_name
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.fn.readfile(filepath))
       end
     end
   }
