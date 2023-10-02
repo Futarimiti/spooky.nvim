@@ -16,9 +16,10 @@ M.choose_one = function (buf, items, user, do_with_choice)
   local pickers = require 'telescope.pickers'
   local finders = require 'telescope.finders'
   local conf = require('telescope.config').values
-  local previewers = require('telescope.previewers')
+  local previewers = require 'telescope.previewers'
   local actions = require 'telescope.actions'
   local action_state = require 'telescope.actions.state'
+  local util = require 'telescope.previewers.utils'
 
   local previewer = previewers.new_buffer_previewer
   { title = previewer_prompt
@@ -40,8 +41,10 @@ M.choose_one = function (buf, items, user, do_with_choice)
         if user.ui.preview_normalised then
           local ft, _ = vim.filetype.match { buf = self.state.bufnr, filename = vim.api.nvim_buf_get_name(buf) }
           if ft ~= nil then
-            require('telescope.previewers.utils').highlighter(self.state.bufnr, ft)
+            util.highlighter(self.state.bufnr, ft)
           end
+        else
+          util.regex_highlighter(self.state.bufnr, 'spooky')
         end
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, result)
       end
