@@ -5,7 +5,7 @@ local M = {}
 -- Telescope picker to select a single item from a list
 -- and return the selected item, or nil if none selected.
 -- User should have Telescope dependency installed.
-M.choose_one = function (items, user, do_with_choice)
+M.choose_one = function (buf, items, user, do_with_choice)
   assert(require 'telescope', 'Telescope is not installed')
 
   local opts = user.ui.telescope_opts
@@ -28,7 +28,22 @@ M.choose_one = function (items, user, do_with_choice)
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { '' })
       else
         local filepath = entry_name
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.fn.readfile(filepath))
+        local content = vim.fn.readfile(filepath)
+        local result = (function ()
+          if user.ui.preview_normalised then
+            local normalised, _ = require('spooky.templates.normalisation').normalise(buf, content)
+            return normalised
+          else
+            return content
+          end
+        end)()
+        if user.ui.preview_normalised then
+          local ft, _ = vim.filetype.match { buf = self.state.bufnr, filename = vim.api.nvim_buf_get_name(buf) }
+          if ft ~= nil then
+            require('telescope.previewers.utils').highlighter(self.state.bufnr, ft)
+          end
+        end
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, result)
       end
     end
   }

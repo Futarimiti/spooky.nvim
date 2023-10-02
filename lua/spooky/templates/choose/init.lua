@@ -30,7 +30,7 @@ M.choose = function (buf, filepaths, user, do_with_choice)
       did_write[buf] = true
     end)
   else
-    require('spooky.templates.choose.telescope').choose_one(filepaths, user, function (x)
+    require('spooky.templates.choose.telescope').choose_one(buf, filepaths, user, function (x)
       do_with_choice(x)
       did_write[buf] = true
     end)
