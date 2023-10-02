@@ -23,7 +23,8 @@ M.choose_one = function (items, user, do_with_choice)
   local previewer = previewers.new_buffer_previewer
   { title = previewer_prompt
   , define_preview = function (self, entry, _)
-      if entry == no_template then
+      local entry_name = entry[1]
+      if entry_name == no_template then
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { '' })
       else
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { 'example', 'preview', 'screen' })
