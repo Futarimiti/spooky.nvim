@@ -1,11 +1,7 @@
 local M = {}
 
--- Keep track buffers we've already written to
-local did_write = {}
-
-M.maybe_choose_template = function (buf, templates, user)
-  if vim.tbl_contains(did_write, buf) or vim.tbl_isempty(templates) then return end
-
+M.choose_one = function (buf, templates, user)
+  assert(false)
   if #templates == 1 and user.auto_use_only then
     table.insert(did_write, buf)
     return templates[1]
@@ -27,3 +23,4 @@ end
 
 
 return M
+
