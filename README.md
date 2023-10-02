@@ -53,18 +53,18 @@ make Telescope a dependency and set `ui.select` to `'telescope'`.
 
 Full description of the options:
 
-| option                  | type    | desc                                                                    |
-|-------------------------|---------|-------------------------------------------------------------------------|
-| `directory`             | string  | Path to skeletons directory                                             |
-| `case_sensitive`        | boolean | Whether to match skeletons case sensitively (WIP)                       |
-| `auto_use_only`         | boolean | Whether to only use auto-inserted skeletons when only 1 available       |
-| `show_no_template`      | boolean | Whether to show "no template" as a possible choice                      |
-| `ui.select`             | string  | UI to use for selecting templates, one of `'builtin'` and `'telescope'` |
-| `ui.prompt`             | string  | Prompt for selecting templates                                          |
-| `ui.previewer_prompt`   | string  | Prompt for previewing templates (Telescope only)                        |
-| `ui.preview_normalised` | boolean | Whether to show normalised template in preview (Telescope only)         |
-| `ui.no_template`        | string  | String for `show_no_template`                                           |
-| `ui.telescope_opts`     | table   | Options to pass to the picker (Telescope only)                          |
+| option                  | type    | desc                                                                                          |
+|-------------------------|---------|-----------------------------------------------------------------------------------------------|
+| `directory`             | string  | Path to skeletons directory                                                                   |
+| `case_sensitive`        | boolean | Whether to match skeletons case sensitively (WIP)                                             |
+| `auto_use_only`         | boolean | Whether to only use auto-inserted skeletons when only 1 available                             |
+| `show_no_template`      | boolean | Whether to show "no template" as a possible choice                                            |
+| `ui.select`             | string  | UI to use for selecting templates, one of `'builtin'` and `'telescope'`                       |
+| `ui.prompt`             | string  | Prompt for selecting templates                                                                |
+| `ui.previewer_prompt`   | string  | Prompt for previewing templates (Telescope only)                                              |
+| `ui.preview_normalised` | boolean | Whether to show normalised template in preview (Telescope only)                               |
+| `ui.no_template`        | string  | String for `show_no_template`                                                                 |
+| `ui.telescope_opts`     | table   | Options to pass to the picker, e.g. `require('telescope.themes').get_ivy {}` (Telescope only) |
 
 ## Usage
 
