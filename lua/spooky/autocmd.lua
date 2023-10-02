@@ -15,7 +15,7 @@ end
 
 M.setup_autocmds = function (user)
   local group = vim.api.nvim_create_augroup('spooky', {})
-  vim.api.nvim_create_autocmd( { 'BufWinEnter', 'BufReadPost', 'FileType' }
+  vim.api.nvim_create_autocmd( { 'VimEnter' }
                              , { group = group
                                , pattern = '*'
                                , callback = create_callback(user)
