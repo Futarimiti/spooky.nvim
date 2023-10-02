@@ -1,3 +1,5 @@
+-- The builtin selector (vim.ui.select).
+
 local M = {}
 
 M.choose_one = function (items, user, do_with_choice)

@@ -1,3 +1,5 @@
+-- Using Telescope as selector with preview.
+
 local M = {}
 
 -- Telescope picker to select a single item from a list
