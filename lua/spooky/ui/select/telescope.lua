@@ -1,6 +1,6 @@
 local M = {}
 
-M.choose_template = function ()
+M.choose_one = function ()
 end
 
 return M
