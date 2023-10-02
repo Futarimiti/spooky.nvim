@@ -20,13 +20,12 @@ M.maybe_insert = function (user)
 
   local templates = require('spooky.templates.get').get_templates(skeleton_dir, ft, basename)
 
-  local template_path = require('spooky.ui.select').select_using(user.ui.select, buf, templates, user)
-  if template_path ~= nil then
+  require('spooky.templates.choose').choose(buf, templates, user, function (template_path)
     local lined_template = vim.fn.readfile(template_path)
     local lined_normalised, special_bindings = require('spooky.templates.normalisation').normalise(buf, lined_template)
     require('spooky.templates.insert').insert_to(buf, lined_normalised)
     require('spooky.templates.cursor').place_cursor(win, special_bindings._cursor)
-  end
+  end)
 end
 
 return M
