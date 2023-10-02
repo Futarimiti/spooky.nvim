@@ -1,18 +1,14 @@
 local M = {}
 
 M.choose_one = function (items, user)
-  if #items == 1 and user.auto_use_only then
-    return items[1]
-  end
-
-  local no_template = '<No template>'
+  local no_template = user.ui.no_template
   local select_choices = vim.deepcopy(items)
   if user.show_no_template then table.insert(select_choices, 1, no_template) end
 
   local user_choice = (function ()
     local temp
 
-    vim.ui.select(select_choices, { prompt = '[spooky] Select template:' }, function (choice)
+    vim.ui.select(select_choices, { prompt = user.ui.prompt }, function (choice)
       if not (choice == nil or choice == no_template) then temp = choice end
     end)
 

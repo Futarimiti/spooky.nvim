@@ -19,6 +19,10 @@ M.select_using = function (ui, buf, items, user)
     return
   end
 
+  if #items == 1 and user.auto_use_only then
+    return items[1]
+  end
+
   local chosen = (function ()
     if ui == 'builtin' then
       return require('spooky.ui.select.builtin').choose_one(items, user)
