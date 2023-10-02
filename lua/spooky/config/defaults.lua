@@ -6,7 +6,10 @@ M.defaults = { directory = vim.fn.stdpath('config') .. '/skeletons'
              , case_sensitive = false
              , auto_use_only = true
              , show_no_template = true
-             , ui = { select = 'builtin' }
+             , ui = { select = 'builtin'
+                    , prompt = 'Select template'
+                    , telescope_opts = {}
+                    }
              }
 
 -- Panics when the typecheck fails.
@@ -16,7 +19,9 @@ M.typecheck = function (config)
                , auto_use_only = { config.auto_use_only, 'boolean' }
                , show_no_template = { config.show_no_template, 'boolean' }
                , ui = { config.ui, 'table' }
+               , ['ui.prompt'] = { config.ui.prompt, 'string' }
                , ['ui.select'] = { config.ui.select, function (ui) return vim.tbl_contains(const.ui_list, ui) end }
+               , ['ui.telescope_opts'] = { config.ui.telescope_opts, 'table' }
                }
 end
 
