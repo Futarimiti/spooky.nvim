@@ -15,12 +15,16 @@ Supports:
 - [x] Variable interpolation
 - [x] Cursor placement
 - [x] Syntax highlighting for templates (yet basic)
+- [ ] Preview templates with Telescope
 
 ## Installation
 
 ```lua
 -- lazy.nvim
-return { 'Futarimiti/spooky.nvim' }
+return
+{ 'Futarimiti/spooky.nvim'
+, dependencies = { 'nvim-telescope/telescope.nvim' }
+}
 ```
 
 ## Configuration
@@ -135,7 +139,6 @@ Here are some of the things I would like to add later on
 (with no order of priority):
 
 - [ ] Doc
-- [ ] Preview templates (e.g. with Telescope)
 - [ ] Greater customisation
 - [ ] Improve existing user options
     - [ ] Reorganise
