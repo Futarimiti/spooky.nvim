@@ -15,7 +15,7 @@ Supports:
 - [x] Variable interpolation
 - [x] Cursor placement
 - [x] Syntax highlighting for templates (yet basic)
-- [ ] Preview templates with Telescope
+- [x] Preview templates with Telescope
 
 ## Installation
 
@@ -23,11 +23,9 @@ Supports:
 -- lazy.nvim
 return
 { 'Futarimiti/spooky.nvim'
+-- if you'd like to use Telescope picker for templates
 , dependencies = { 'nvim-telescope/telescope.nvim' }
-, config = function ()
-    require('spooky').setup {}
-    require('telescope').load_extension 'spooky'
-end
+, opts = {...}
 }
 ```
 
@@ -40,6 +38,13 @@ require('spooky').setup { directory = vim.fn.stdpath('config') .. '/skeletons'
                         , case_sensitive = false
                         , auto_use_only = true
                         , show_no_template = true
+                        , ui = { select = 'builtin'
+                               , prompt = 'Select template'
+                               , previewer_prompt = 'Preview'
+                               , preview_normalised = true
+                               , no_template = '<No template>'
+                               , telescope_opts = {}
+                               }
                         }
 ```
 
@@ -138,7 +143,7 @@ are special and will be used by spooky:
 `spooky` is currently, and might forever be in its infancy,
 so please do expect breaking changes.
 Things are still quite limited for now:
-no documentation, no fancy ui, restricted customisation, etc.
+no documentation, no very-fancy ui, restricted customisation, etc.
 Here are some of the things I would like to add later on
 (with no order of priority):
 
