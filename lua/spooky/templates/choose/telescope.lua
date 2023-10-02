@@ -53,7 +53,9 @@ M.choose_one = function (items, user, do_with_choice)
                           actions.close(prompt_buf)
                           local selection = action_state.get_selected_entry()
                           if #selection == 1 then
-                            do_with_choice(selection[1])
+                            local choice = selection[1]
+                            if choice == no_template then return end
+                            do_with_choice(choice)
                           elseif #selection ~= 0 then
                             error [[[spooky] Tbh I'm not sure how to do with multiple selections.
                             Please, just pick 1 for now.]]
