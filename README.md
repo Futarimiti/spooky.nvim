@@ -24,6 +24,10 @@ Supports:
 return
 { 'Futarimiti/spooky.nvim'
 , dependencies = { 'nvim-telescope/telescope.nvim' }
+, config = function ()
+    require('spooky').setup {}
+    require('telescope').load_extension 'spooky'
+end
 }
 ```
 
