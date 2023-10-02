@@ -21,9 +21,9 @@ M.select_using = function (ui, buf, items, user)
 
   local chosen = (function ()
     if ui == 'builtin' then
-      return require('spooky.ui.select.builtin').choose_one(buf, items, user)
+      return require('spooky.ui.select.builtin').choose_one(items, user)
     else
-      return require('spooky.ui.select.telescope').choose_one(buf, items, user)
+      return require('spooky.ui.select.telescope').choose_one(items, user)
     end
   end)()
 
