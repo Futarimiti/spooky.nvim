@@ -2,11 +2,11 @@ local M = {}
 
 -- Should we perform insertion for this window?
 -- Returns result and reason if false.
-local should_insert = function (win)
+local should_insert = function (win, forced)
   local buf = vim.api.nvim_win_get_buf(win)
 
   local normal_buf = vim.api.nvim_buf_get_option(buf, 'buftype') == ''
-  if not normal_buf then return false, 'buftype is not empty' end
+  if not normal_buf and not forced then return false, 'buftype is not empty (add ! to override)' end
 
   local fullname = vim.api.nvim_buf_get_name(buf)
   if fullname == '' then return false, 'not a valid file (no name)' end
@@ -18,7 +18,7 @@ local should_insert = function (win)
 
   local fsize = vim.fn.getfsize(fullname)
   local emptyfile = fsize < 4
-  if not emptyfile then return false, 'file not empty' end
+  if not emptyfile and not forced then return false, 'file not empty (add ! to override)' end
 
   return true, nil
 end
@@ -38,7 +38,7 @@ M.maybe_insert = function (win, user, by_user, forced)
     vim.notify(...)
   end
 
-  local should, reason = should_insert(win)
+  local should, reason = should_insert(win, forced)
   if not should then
     log('[spooky] cannot insert template for current window, reason: ' .. reason, vim.log.levels.WARN)
     return
