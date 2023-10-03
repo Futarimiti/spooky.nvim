@@ -5,7 +5,7 @@ local M = {}
 M.choose_one = function (fullpaths, user, do_with_choice)
   local no_template = user.ui.no_template
   local show_full = user.ui.select_full_path
-  local show_no_template = user.show_no_template
+  local show_no_template = user.ui.show_no_template
   local representation, mappings = (function ()
     local ret, map = {}, {}
     for _, fullpath in ipairs(fullpaths) do
