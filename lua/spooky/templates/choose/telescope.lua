@@ -13,7 +13,7 @@ M.choose_one = function (buf, fullpaths, user, do_with_choice)
   local previewer_prompt = user.ui.previewer_prompt
   local no_template = user.ui.no_template
   local show_full = user.ui.select_full_path
-  local show_no_template = user.ui.show_no_template
+  local show_no_template = user.show_no_template
 
   local pickers = require 'telescope.pickers'
   local finders = require 'telescope.finders'
