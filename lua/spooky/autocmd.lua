@@ -1,15 +1,9 @@
 local M = {}
 
 local create_callback = function (user)
-  return function (args)
-    local normal_buf = vim.api.nvim_buf_get_option(args.buf, 'buftype') == ''
-    if not normal_buf then return end
-
-    local fsize = vim.fn.getfsize(args.file)
-    local emptyfile = fsize < 4
-    if not emptyfile then return end
-
-    require('spooky.templates').maybe_insert(user)
+  return function (_)
+    local win = vim.api.nvim_get_current_win()
+    require('spooky.templates').maybe_insert(win, user)
   end
 end
 
