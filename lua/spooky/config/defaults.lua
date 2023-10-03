@@ -7,6 +7,7 @@ M.defaults = { directory = vim.fn.stdpath('config') .. '/skeletons'
              , auto_use_only = true
              , show_no_template = true
              , ui = { select = 'builtin'
+                    , select_full_path = false
                     , prompt = 'Select template'
                     , previewer_prompt = 'Preview'
                     , preview_normalised = true
@@ -23,6 +24,7 @@ M.typecheck = function (config)
                , show_no_template = { config.show_no_template, 'boolean' }
                , ui = { config.ui, 'table' }
                , ['ui.select'] = { config.ui.select, function (ui) return vim.tbl_contains(const.ui_list, ui) end }
+               , ['ui.select_full_path'] = { config.ui.select_full_path, 'boolean' }
                , ['ui.prompt'] = { config.ui.prompt, 'string' }
                , ['ui.previewer_prompt'] = { config.ui.previewer_prompt, 'string' }
                , ['ui.preview_normalised'] = { config.ui.preview_normalised, 'boolean' }

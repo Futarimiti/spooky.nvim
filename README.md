@@ -39,6 +39,7 @@ require('spooky').setup { directory = vim.fn.stdpath('config') .. '/skeletons'
                         , auto_use_only = true
                         , show_no_template = true
                         , ui = { select = 'builtin'
+                               , select_full_path = false
                                , prompt = 'Select template'
                                , previewer_prompt = 'Preview'
                                , preview_normalised = true
@@ -60,6 +61,7 @@ Full description of the options:
 | `auto_use_only`         | boolean | Whether to only use auto-inserted skeletons when only 1 available                             |
 | `show_no_template`      | boolean | Whether to show "no template" as a possible choice                                            |
 | `ui.select`             | string  | UI to use for selecting templates, one of `'builtin'` and `'telescope'`                       |
+| `ui.select_full_path`   | boolean | Whether to show full templates paths or basenames in selection UI                             |
 | `ui.prompt`             | string  | Prompt for selecting templates                                                                |
 | `ui.previewer_prompt`   | string  | Prompt for previewing templates (Telescope only)                                              |
 | `ui.preview_normalised` | boolean | Whether to show normalised template in preview (Telescope only)                               |
