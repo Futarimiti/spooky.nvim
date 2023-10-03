@@ -2,13 +2,24 @@
 
 local M = {}
 
-M.choose_one = function (items, user, do_with_choice)
+M.choose_one = function (fullpaths, user, do_with_choice)
   local no_template = user.ui.no_template
-  local select_choices = vim.deepcopy(items)
-  if user.show_no_template then table.insert(select_choices, 1, no_template) end
+  local show_full = user.ui.select_full_path
+  local show_no_template = user.show_no_template
+  local representation = (function ()
+    local ret = {}
+    for _, fullpath in ipairs(fullpaths) do
+      local path = show_full and fullpath or vim.fn.fnamemodify(fullpath, ':t:r')
+      table.insert(ret, path)
+    end
+    if show_no_template then table.insert(ret, no_template) end
+    return ret
+  end)()
 
-  vim.ui.select(select_choices, { prompt = user.ui.prompt }, function (choice)
-    if not (choice == nil or choice == no_template) then do_with_choice(choice) end
+  vim.ui.select(representation, { prompt = user.ui.prompt }, function (choice, idx)
+    if choice == nil or choice == no_template then return end
+    local fullpath = fullpaths[idx]
+    do_with_choice(fullpath)
   end)
 end
 
