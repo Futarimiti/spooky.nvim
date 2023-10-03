@@ -1,7 +1,8 @@
 # spooky.nvim
 
 Another not-so-minimal plugin for skeleton templates,
-heavily based on [`esqueleto`](https://github.com/cvigilv/esqueleto.nvim)
+based on and extending the idea of
+[`esqueleto`](https://github.com/cvigilv/esqueleto.nvim)
 by Carlos Vigil-Vásquez. Thanks Carl.
 
 ## Why another?
