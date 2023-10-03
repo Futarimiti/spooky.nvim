@@ -12,7 +12,7 @@ Combined with advantages from multiple skeleton plugins,
 Supports:
 - [x] Specific or general templates
 - [x] Multiple templates (choose at creation)
-- [x] Variable interpolation
+- [x] Embedding logic inside templates
 - [x] Cursor placement
 - [x] Syntax highlighting for templates (yet basic)
 - [x] Telescope preview for interpolated, syntax highlighted templates
