@@ -16,6 +16,8 @@ Supports:
 - [x] Cursor placement
 - [x] Syntax highlighting for templates (yet basic)
 - [x] Telescope preview for interpolated, syntax highlighted templates
+- [x] User command
+    - currently only used as a fallback if autocmd breaks
 
 ![usage](https://github.com/Futarimiti/spooky.nvim/assets/96031125/887ed485-6210-49ae-a053-33532e0a0a36)
 
@@ -177,7 +179,7 @@ Here are some of the things I would like to add later on
 - [ ] Polish on interpolation mechanism
 - [ ] Project-specific templates?
 - [ ] Preset templates?
-- [ ] User command?
+- [ ] Make command more useful
 
 If you feel like you can help with any of these,
 or have better ideas, contributions are welcome;
