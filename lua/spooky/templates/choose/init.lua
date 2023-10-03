@@ -21,7 +21,8 @@ M.choose = function (buf, filepaths, user, do_with_choice)
   end
 
   if #filepaths == 1 and user.auto_use_only then
-    return filepaths[1]
+    do_with_choice(filepaths[1])
+    return
   end
 
   if ui == 'builtin' then
