@@ -10,13 +10,19 @@ local did_write = {}
 -- user settings,
 -- and what to do after getting the choice,
 -- prompt the user to choose one
--- only if the buffer hasn't been written to already
+-- only if the buffer hasn't been written to already (unless forced)
 -- and there are one or more items to choose from.
 -- Return the choice, or nil if no choice was made.
-M.choose = function (buf, filepaths, user, do_with_choice)
+M.choose = function (forced, log, buf, filepaths, user, do_with_choice)
   local ui = user.ui.select
   assert(vim.tbl_contains(const.ui_list, ui))
-  if did_write[buf] or vim.tbl_isempty(filepaths) then
+  if did_write[buf] and not forced then
+    log('[spooky] template already written to this buffer (add ! to override)', vim.log.levels.WARN)
+    return
+  end
+
+  if vim.tbl_isempty(filepaths) then
+    log('[spooky] no templates available', vim.log.levels.WARN)
     return
   end
 
