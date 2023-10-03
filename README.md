@@ -16,7 +16,8 @@ Supports:
 - [x] Cursor placement
 - [x] Syntax highlighting for templates (yet basic)
 - [x] Telescope preview for interpolated, syntax highlighted templates
-      <img width="900" alt="example" src="https://github.com/Futarimiti/spooky.nvim/assets/96031125/fc843c5e-47ee-447a-8dbc-9f36354501e6">
+
+![out](https://github.com/Futarimiti/spooky.nvim/assets/96031125/7d8ad8e6-d664-4b82-83a4-7e2770e0e5ec)
 
 ## Installation
 
