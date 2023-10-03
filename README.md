@@ -17,7 +17,7 @@ Supports:
 - [x] Syntax highlighting for templates (yet basic)
 - [x] Telescope preview for interpolated, syntax highlighted templates
 
-![out](https://github.com/Futarimiti/spooky.nvim/assets/96031125/7d8ad8e6-d664-4b82-83a4-7e2770e0e5ec)
+![usage](https://github.com/Futarimiti/spooky.nvim/assets/96031125/887ed485-6210-49ae-a053-33532e0a0a36)
 
 ## Installation
 
