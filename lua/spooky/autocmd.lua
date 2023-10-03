@@ -7,7 +7,7 @@ M.setup_autocmds = function (user)
                                , pattern = '*'
                                , callback = function (_)
                                    local win = vim.api.nvim_get_current_win()
-                                   require('spooky.templates').maybe_insert(win, user, false)
+                                   require('spooky.templates').maybe_insert(win, user, false, false)
                                  end
                                }
                              )
