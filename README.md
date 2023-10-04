@@ -17,8 +17,7 @@ Supports:
 - [x] Cursor placement
 - [x] Syntax highlighting for templates (yet basic)
 - [x] Telescope preview for interpolated, syntax highlighted templates
-- [x] User command
-    - currently only used as a fallback if autocmd breaks
+- [x] User command to manually invoke Spooky
 
 ![usage](https://github.com/Futarimiti/spooky.nvim/assets/96031125/887ed485-6210-49ae-a053-33532e0a0a36)
 
