@@ -5,7 +5,7 @@ local M = {}
 -- Telescope picker to select a single item from a list
 -- and return the selected item, or nil if none selected.
 -- User should have Telescope dependency installed.
-M.choose_one = function (buf, fullpaths, user, do_with_choice)
+M.choose_one = function (buf, fullpaths, user, insert, preview)
   assert(require 'telescope', 'Telescope is not installed')
 
   local opts = user.ui.telescope_opts
@@ -47,25 +47,20 @@ M.choose_one = function (buf, fullpaths, user, do_with_choice)
       if entry_name == no_template then
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { '' })
       else
+        local preview_buf = self.state.bufnr
         local fullpath = mappings[entry_name]
-        local content = vim.fn.readfile(fullpath)
-        local result = (function ()
-          if user.ui.preview_normalised then
-            local normalised, _ = require('spooky.templates.normalisation').normalise(buf, content)
-            return normalised
-          else
-            return content
-          end
-        end)()
-        if user.ui.preview_normalised then
-          local ft, _ = vim.filetype.match { buf = self.state.bufnr, filename = vim.api.nvim_buf_get_name(buf) }
+        local normalise = user.ui.preview_normalised
+        local highlight = normalise
+        local result = preview(fullpath, normalise)
+        vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, result)
+        if highlight then
+          local ft, _ = vim.filetype.match { buf = preview_buf, filename = vim.api.nvim_buf_get_name(buf) }
           if ft ~= nil then
-            util.highlighter(self.state.bufnr, ft)
+            util.highlighter(preview_buf, ft)
+          else
+            util.regex_highlighter(preview_buf, 'spooky')
           end
-        else
-          util.regex_highlighter(self.state.bufnr, 'spooky')
         end
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, result)
       end
     end
   }
@@ -81,7 +76,7 @@ M.choose_one = function (buf, fullpaths, user, do_with_choice)
                           if #selection == 1 then
                             local choice = selection[1]
                             if choice == no_template then return end
-                            do_with_choice(mappings[choice])
+                            insert(mappings[choice])
                           elseif #selection ~= 0 then
                             error [[[spooky] Tbh I'm not sure how to do with multiple selections.
                             Please, just pick 1 for now.]]

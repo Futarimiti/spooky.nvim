@@ -50,12 +50,37 @@ M.maybe_insert = function (win, user, by_user, forced)
 
   local templates = require('spooky.templates.get').get_templates(user.directory, ft, basename)
 
-  require('spooky.templates.choose').choose(forced, log, buf, templates, user, function (template_path)
-    local lined_template = vim.fn.readfile(template_path)
-    local lined_normalised, special_bindings = require('spooky.templates.normalisation').normalise(buf, lined_template)
+  -- Cache of:
+  -- [1] original template in lines
+  -- [2] normalised template in lines
+  -- [3] special bindings.
+  -- normalised templates will be used in both preview and insertion
+  -- so there's need to cache them
+  local cache = {}
+  local update = function (template_fullpath, c)
+    if cache[template_fullpath] ~= nil then return end
+    local lined_template = vim.fn.readfile(template_fullpath)
+    local lined_normalised, special_binds = require('spooky.templates.normalisation').normalise(buf, lined_template)
+    c[template_fullpath] = { lined_template, lined_normalised, special_binds }
+  end
+
+  -- Given a template path,
+  -- a boolean normalise
+  -- returns a normalised template IN LINES.
+  local preview = function (template_fullpath, normalise)
+    update(template_fullpath, cache)
+    local original, normal, _ = unpack(cache[template_fullpath])
+    return normalise and normal or original
+  end
+
+  local insert = function (template_fullpath)
+    update(template_fullpath, cache)
+    local _, lined_normalised, special_bindings = unpack(cache[template_fullpath])
     require('spooky.templates.insert').insert_to(buf, lined_normalised)
     require('spooky.templates.cursor').place_cursor(win, special_bindings._cursor)
-  end)
+  end
+
+  require('spooky.templates.choose').choose(forced, log, buf, templates, user, insert, preview)
 end
 
 return M
