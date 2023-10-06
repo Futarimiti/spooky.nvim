@@ -172,6 +172,7 @@ no documentation, no very-fancy ui, restricted customisation, etc.
 Here are some of the things I would like to add later on[^1]
 (with no order of priority):
 
+- [ ] Implement case sensitivity option
 - [ ] Greater customisation
 - [ ] Improve existing user options
     - [ ] Reorganise
