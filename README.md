@@ -2,7 +2,7 @@
 
 Another not-so-minimal plugin for skeleton templates,
 based on and extending the idea of
-[`esqueleto`](https://github.com/cvigilv/esqueleto.nvim)
+[esqueleto.nvim](https://github.com/cvigilv/esqueleto.nvim)
 by Carlos Vigil-Vásquez. Thanks Carl.
 
 ## Why another?
@@ -18,6 +18,7 @@ Supports:
 - [x] Syntax highlighting for templates (yet basic)
 - [x] Telescope preview for interpolated, syntax highlighted templates
 - [x] User command to manually invoke Spooky
+- [x] Auto-generated doc if you are on [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ![usage](https://github.com/Futarimiti/spooky.nvim/assets/96031125/887ed485-6210-49ae-a053-33532e0a0a36)
 
@@ -58,19 +59,19 @@ make Telescope a dependency and set `ui.select` to `'telescope'`.
 
 Full description of the options:
 
-| option                  | type    | desc                                                                                          |
-|-------------------------|---------|-----------------------------------------------------------------------------------------------|
-| `directory`             | string  | Path to skeletons directory                                                                   |
-| `case_sensitive`        | boolean | Whether to match skeletons case sensitively (WIP)                                             |
-| `auto_use_only`         | boolean | Whether to only use auto-inserted skeletons when only 1 available                             |
-| `ui.select`             | string  | UI to use for selecting templates, one of `'builtin'` and `'telescope'`                       |
-| `ui.select_full_path`   | boolean | Whether to show full templates paths or basenames in selection UI                             |
-| `ui.show_no_template`   | boolean | Whether to show "no template" as a possible choice                                            |
-| `ui.prompt`             | string  | Prompt for selecting templates                                                                |
-| `ui.previewer_prompt`   | string  | Prompt for previewing templates (Telescope only)                                              |
-| `ui.preview_normalised` | boolean | Whether to show normalised template in preview (Telescope only)                               |
-| `ui.no_template`        | string  | String for `show_no_template`                                                                 |
-| `ui.telescope_opts`     | table   | Options to pass to the picker, e.g. `require('telescope.themes').get_ivy {}` (Telescope only) |
+| option                  | type    | desc                                                                                               |
+|-------------------------|---------|----------------------------------------------------------------------------------------------------|
+| `directory`             | string  | Path to skeletons directory                                                                        |
+| `case_sensitive`        | boolean | Whether to match skeletons case sensitively (WIP)                                                  |
+| `auto_use_only`         | boolean | Whether to only use auto-inserted skeletons when only 1 available                                  |
+| `ui.select`             | string  | UI to use for selecting templates, one of `'builtin'` and `'telescope'`                            |
+| `ui.select_full_path`   | boolean | Whether to show full templates paths or basenames in selection UI                                  |
+| `ui.show_no_template`   | boolean | Whether to show "no template" as a possible choice                                                 |
+| `ui.prompt`             | string  | Prompt for selecting templates                                                                     |
+| `ui.previewer_prompt`   | string  | Prompt for previewing templates (Telescope only)                                                   |
+| `ui.preview_normalised` | boolean | Whether to show normalised template in preview (Telescope only)                                    |
+| `ui.no_template`        | string  | String for `show_no_template`                                                                      |
+| `ui.telescope_opts`     | table   | Options to be passed to the picker, e.g. `require('telescope.themes').get_ivy {}` (Telescope only) |
 
 ## Usage
 
@@ -168,10 +169,9 @@ are special and will be used by spooky:
 so please do expect breaking changes.
 Things are still quite limited for now:
 no documentation, no very-fancy ui, restricted customisation, etc.
-Here are some of the things I would like to add later on
+Here are some of the things I would like to add later on[^1]
 (with no order of priority):
 
-- [ ] Doc
 - [ ] Greater customisation
 - [ ] Improve existing user options
     - [ ] Reorganise
@@ -180,6 +180,9 @@ Here are some of the things I would like to add later on
 - [ ] Project-specific templates?
 - [ ] Preset templates?
 - [ ] Make command more useful
+- [ ] Vimdoc?
+
+[^1]: Those with question marks might not be implemented
 
 If you feel like you can help with any of these,
 or have better ideas, contributions are welcome;
