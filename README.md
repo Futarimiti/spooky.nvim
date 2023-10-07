@@ -7,10 +7,15 @@ by Carlos Vigil-Vásquez. Thanks Carl.
 
 ## Why another?
 
-Combined with advantages from multiple skeleton plugins, 
-`spooky` aims to focus on both easy creating and managing skeleton templates.
+Because you can't have too many skeleton plugins! :)
 
-Supports:
+`spooky` referenced a number of plugins for skeleton templates,
+in particular [vim-skeletons](https://github.com/pgilad/vim-skeletons)
+and [esqueleto.nvim](https://github.com/cvigilv/esqueleto.nvim),
+combining the best of them. It is also designed to be
+easy on eyes, easy to manage and easy to use.
+
+Supported features:
 - [x] Specific or general templates
 - [x] Multiple templates (choose at creation)
 - [x] Embedding logic inside templates
