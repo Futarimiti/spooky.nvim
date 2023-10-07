@@ -68,7 +68,7 @@ Full description of the options:
 | option                  | type    | desc                                                                                               |
 |-------------------------|---------|----------------------------------------------------------------------------------------------------|
 | `directory`             | string  | Path to skeletons directory                                                                        |
-| `case_sensitive`        | boolean | Whether to match skeletons case sensitively (WIP)                                                  |
+| `case_sensitive`        | boolean | Whether to match skeletons case sensitively (e.g. should `Main.py` match `main.py.skl`?)           |
 | `auto_use_only`         | boolean | Whether to only use auto-inserted skeletons when only 1 available                                  |
 | `ui.select`             | string  | UI to use for selecting templates, one of `'builtin'` and `'telescope'`                            |
 | `ui.select_full_path`   | boolean | Whether to show full templates paths or basenames in selection UI                                  |
@@ -179,7 +179,6 @@ no documentation, no very-fancy ui, restricted customisation, etc.
 Here are some of the things I would like to add later on[^1]
 (with no order of priority):
 
-- [ ] Implement case sensitivity option
 - [ ] Greater customisation
 - [ ] Improve existing user options
     - [ ] Reorganise

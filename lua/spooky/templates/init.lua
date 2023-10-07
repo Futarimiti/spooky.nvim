@@ -32,7 +32,7 @@ M.maybe_insert = function (win, user, by_user, forced)
   local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
   local basename = vim.fs.basename(vim.api.nvim_buf_get_name(buf))
 
-  local templates = get_templates(user.directory, ft, basename)
+  local templates = get_templates(user, ft, basename)
 
   -- Cache of:
   -- [1] original template in lines
