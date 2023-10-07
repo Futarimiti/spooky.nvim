@@ -11,6 +11,7 @@ M.defaults = { directory = vim.fn.stdpath('config') .. '/skeletons'
                     , prompt = 'Select template'
                     , previewer_prompt = 'Preview'
                     , preview_normalised = true
+                    , highlight_preview = true
                     , no_template = '<No template>'
                     , telescope_opts = {}
                     }
@@ -28,6 +29,7 @@ M.typecheck = function (config)
                , ['ui.prompt'] = { config.ui.prompt, 'string' }
                , ['ui.previewer_prompt'] = { config.ui.previewer_prompt, 'string' }
                , ['ui.preview_normalised'] = { config.ui.preview_normalised, 'boolean' }
+               , ['ui.highlight_preview'] = { config.ui.highlight_preview, 'boolean' }
                , ['ui.no_template'] = { config.ui.no_template, 'string' }
                , ['ui.telescope_opts'] = { config.ui.telescope_opts, 'table' }
                }

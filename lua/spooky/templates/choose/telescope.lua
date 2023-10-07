@@ -40,6 +40,18 @@ M.choose_one = function (buf, fullpaths, user, insert, preview)
     return ret, map
   end)()
 
+  local highlight = function (previewer_buf, normalised)
+    if not normalised then
+      util.regex_highlighter(previewer_buf, 'spooky')
+      return
+    end
+
+    local ft, _ = vim.filetype.match { buf = previewer_buf }
+    if ft ~= nil then
+      util.highlighter(previewer_buf, ft)
+    end
+  end
+
   local define_preview = function (self, entry, _)
     local entry_name = entry[1]
     local selected_no_template = entry_name == no_template
@@ -51,19 +63,12 @@ M.choose_one = function (buf, fullpaths, user, insert, preview)
     end
 
     local fullpath = mappings[entry_name]
-    local normalise = user.ui.preview_normalised
-    local highlight = normalise
-    local result = preview(fullpath, normalise)
+    local should_normalise = user.ui.preview_normalised
+    local should_highlight = user.ui.highlight_preview
+    local result = preview(fullpath, should_normalise)
 
     vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, result)
-    if highlight then
-      local ft, _ = vim.filetype.match { buf = preview_buf, filename = vim.api.nvim_buf_get_name(buf) }
-      if ft ~= nil then
-        util.highlighter(preview_buf, ft)
-      else
-        util.regex_highlighter(preview_buf, 'spooky')
-      end
-    end
+    if should_highlight then highlight(buf, should_normalise) end
   end
 
   local previewer = previewers.new_buffer_previewer

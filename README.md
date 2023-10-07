@@ -53,6 +53,7 @@ require('spooky').setup { directory = vim.fn.stdpath('config') .. '/skeletons'
                                , prompt = 'Select template'
                                , previewer_prompt = 'Preview'
                                , preview_normalised = true
+                               , highlight_preview = true
                                , no_template = '<No template>'
                                , telescope_opts = {}
                                }
@@ -75,6 +76,7 @@ Full description of the options:
 | `ui.prompt`             | string  | Prompt for selecting templates                                                                     |
 | `ui.previewer_prompt`   | string  | Prompt for previewing templates (Telescope only)                                                   |
 | `ui.preview_normalised` | boolean | Whether to show normalised template in preview (Telescope only)                                    |
+| `ui.highlight_preview`  | boolean | Whether to highlight preview (Telescope only)                                                      |
 | `ui.no_template`        | string  | String for `show_no_template`                                                                      |
 | `ui.telescope_opts`     | table   | Options to be passed to the picker, e.g. `require('telescope.themes').get_ivy {}` (Telescope only) |
 
