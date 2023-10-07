@@ -40,29 +40,35 @@ M.choose_one = function (buf, fullpaths, user, insert, preview)
     return ret, map
   end)()
 
-  local previewer = previewers.new_buffer_previewer
-  { title = previewer_prompt
-  , define_preview = function (self, entry, _)
-      local entry_name = entry[1]
-      if entry_name == no_template then
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { '' })
+  local define_preview = function (self, entry, _)
+    local entry_name = entry[1]
+    local selected_no_template = entry_name == no_template
+    local preview_buf = self.state.bufnr
+
+    if selected_no_template then
+      vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, { '' })
+      return
+    end
+
+    local fullpath = mappings[entry_name]
+    local normalise = user.ui.preview_normalised
+    local highlight = normalise
+    local result = preview(fullpath, normalise)
+
+    vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, result)
+    if highlight then
+      local ft, _ = vim.filetype.match { buf = preview_buf, filename = vim.api.nvim_buf_get_name(buf) }
+      if ft ~= nil then
+        util.highlighter(preview_buf, ft)
       else
-        local preview_buf = self.state.bufnr
-        local fullpath = mappings[entry_name]
-        local normalise = user.ui.preview_normalised
-        local highlight = normalise
-        local result = preview(fullpath, normalise)
-        vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, result)
-        if highlight then
-          local ft, _ = vim.filetype.match { buf = preview_buf, filename = vim.api.nvim_buf_get_name(buf) }
-          if ft ~= nil then
-            util.highlighter(preview_buf, ft)
-          else
-            util.regex_highlighter(preview_buf, 'spooky')
-          end
-        end
+        util.regex_highlighter(preview_buf, 'spooky')
       end
     end
+  end
+
+  local previewer = previewers.new_buffer_previewer
+  { title = previewer_prompt
+  , define_preview = define_preview
   }
 
   pickers.new(opts, { prompt_title = prompt
