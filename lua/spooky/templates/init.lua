@@ -41,7 +41,7 @@ M.maybe_insert = function (win, user, by_user, forced)
   local get_templates = require('spooky.templates.get').get_templates
   local choose = require('spooky.templates.choose').choose
   local insert_to = require('spooky.templates.insert').insert_to
-  local place_cursor = require('spooky.templates.cursor').place_cursor
+  local place_cursor = require('spooky.cursor').place_cursor
   local normalise = require('spooky.templates.normalisation').normalise
 
   local should, reason = should_insert(win, forced)
