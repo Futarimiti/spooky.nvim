@@ -33,12 +33,14 @@ M.choose = function (forced, log, buf, filepaths, user, do_with_choice, preview)
   end
 
   if ui == 'builtin' then
-    require('spooky.templates.choose.builtin').choose_one(filepaths, user, function (x)
+    local builtin_choose_one = require('spooky.templates.choose.builtin').choose_one
+    builtin_choose_one(filepaths, user, function (x)
       do_with_choice(x)
       did_write[buf] = true
     end)
   else
-    require('spooky.templates.choose.telescope').choose_one(buf, filepaths, user, function (x)
+    local telescope_choose_one = require('spooky.templates.choose.telescope').choose_one
+    telescope_choose_one(buf, filepaths, user, function (x)
       do_with_choice(x)
       did_write[buf] = true
     end, preview)
