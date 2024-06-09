@@ -15,11 +15,6 @@ M.maybe_insert = function (win, user, by_user, forced)
     vim.notify(...)
   end
 
-  local get_templates = require('spooky.templates.get').get_templates
-  local choose = require('spooky.templates.choose').choose
-  local insert_to = require('spooky.templates.insert').insert_to
-  local place_cursor = require('spooky.cursor').place_cursor
-  local normalise = require('spooky.templates.normalisation').normalise
   local should_insert = require('spooky.templates.check').should_insert
 
   local should, reason = should_insert(win, forced)
@@ -28,8 +23,14 @@ M.maybe_insert = function (win, user, by_user, forced)
     return
   end
 
+  local get_templates = require('spooky.templates.get').get_templates
+  local choose = require('spooky.templates.choose').choose
+  local insert_to = require('spooky.templates.insert').insert_to
+  local place_cursor = require('spooky.cursor').place_cursor
+  local normalise = require('spooky.templates.normalisation').normalise
+
   local buf = vim.api.nvim_win_get_buf(win)
-  local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+  local ft = vim.api.nvim_get_option_value('filetype', {buf=buf})
   local basename = vim.fs.basename(vim.api.nvim_buf_get_name(buf))
 
   local templates = get_templates(user, ft, basename)
@@ -68,4 +69,3 @@ M.maybe_insert = function (win, user, by_user, forced)
 end
 
 return M
-
